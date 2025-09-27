@@ -2,6 +2,7 @@
 # --- This is a Main file which will contain Welcome Screen and Main Menu features. 
 import functions  # Importing functions module from functions.py file
 import demo       # Importing Dummy Data (preloaded Users and Items with different status)
+import os, sys
 
 
 def handle_choice(choice: str) -> bool:
@@ -48,23 +49,28 @@ def handle_choice(choice: str) -> bool:
 
 
 def run_once(input_func=input) -> bool:
-    """
-    Runs exactly one iteration of the main menu.
-    Returns the same bool as handle_choice().
-    """
     functions.main_menu_handler()
-    choice = input_func("✨ Please choose menu option (q for exit)✨: ")
+    # 1) If env var provided, use it
+    auto = os.getenv("AUTO_CHOICE")
+    if auto is not None:
+        choice = auto
+    # 2) If no TTY (non-interactive container), default to 'q'
+    elif not sys.stdin.isatty():
+        choice = "q"
+    else:
+        try:
+            choice = input_func("✨ Please choose menu option (q for exit)✨: ")
+        except (EOFError, KeyboardInterrupt):
+            # Gracefully exit if stdin is closed or user cancels
+            print("\n👋 Thank you for using our service. See you later!\n")
+            return False
     return handle_choice(choice)
 
-
 def main():
-    functions.welcome_screen()  # Welcome Screen (will be displayed once and not included to the menu loop)
-    # functions.login_screen()  # Temporarily Disabled
+    functions.welcome_screen()
     while True:
-        keep_going = run_once()
-        if not keep_going:
+        if not run_once():
             break
-
 
 if __name__ == "__main__":
     main()

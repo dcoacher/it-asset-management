@@ -10,7 +10,7 @@ COPY requirements.txt .
 # Installation Python dependencies from the copied earlier file
 RUN pip install -r requirements.txt
 
-# Copy all files
+# Copying all required files
 COPY . .
 
 # Running Pytest
