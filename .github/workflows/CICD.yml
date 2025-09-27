@@ -1,1 +1,109 @@
+###############################################
+# Start of Step 1: Code Checkout
+###############################################
 
+name: CI/CD Pipeline
+run-name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+    # paths-ignore:
+    #   - .github/workflows/CICD.yml
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python environment
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      # - name: Setup tmate session
+      #   uses: mxschmitt/action-tmate@v3
+      #   with:
+      #     limit-access-to-actor: false
+    
+      - name: Install required dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r cicd/requirements.txt
+
+      - name: Run tests
+        run: |
+          cd cicd
+          pytest
+
+###############################################
+# End of Step 1: Code Checkout
+###############################################
+
+###############################################
+# Start of Step 2: Docker Image Build
+###############################################
+
+  docker-build-push:
+    runs-on: ubuntu-latest
+    needs: build-test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and tag Docker image
+        run: |
+          docker build -t it-asset-management:v1 ./cicd
+          docker tag it-asset-management:v1 dcoacher/it-asset-management:v1
+
+      - name: Push Docker image
+        run: docker push dcoacher/it-asset-management:v1
+
+###############################################
+# End of Step 2: Docker Image Build
+###############################################
+
+###############################################
+# Start of Step 3: Deploy Using Docker Image
+###############################################
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: docker-build-push
+
+    steps:
+      - name: Pull Docker image
+        run: |
+          docker pull dcoacher/it-asset-management:v1
+
+      - name: Docker Run
+        run: |
+          docker run --rm dcoacher/it-asset-management:v1 > it-asset-management.output.txt
+          cat it-asset-management.output.txt
+
+      - name: Upload get_users.output as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: it-asset-management-output
+          path: it-asset-management.output.txt
+
+###############################################
+# End of Step 3: Deploy Using Docker Image
+###############################################
