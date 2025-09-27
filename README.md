@@ -32,9 +32,10 @@ Make your IT Asset Management process simple and controlled. This web-based, run
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.6.1 Setting AWS Lab Credentials](#361-setting-aws-lab-credentials)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.6.2 Running Automated Deployment Script](#362-running-automated-deployment-script)<br>
     [3.7 Web Application Access and HA Testing via AWS GUI](#37-web-application-access-and-ha-testing-via-aws-gui)<br>
-4. [License](#4-license)<br>
-5. [Authors](#5-authors)<br>
-6. [Feedback](#6-feedback)<br>
+4. CI/CD Pipeline(#4-ci-cd-pipeline)<br>
+5. [License](#5-license)<br>
+6. [Authors](#6-authors)<br>
+7. [Feedback](#7-feedback)<br>
 
 ## 1. Introduction
 Why we decided to made this application? The answer is pretty simple - every IT department needs asset tracking.<br>
@@ -313,10 +314,19 @@ docker push $IMAGE_URI
 ```
 
 ### 2.5 Project Files
+- :file_folder: *`.github/workflows`* directory contains CICD pipeline files
+    - :page_facing_up: *`CICD.yaml`* CICD pipeline configuration file
 - :file_folder: *`aws`* directory contains data relevant to AWS deployment
     - :page_facing_up: *`cloudformation.yaml`* configuration file for CloudFormation in AWS environment
+- :file_folder: *`cicd`* directory contains CICD pipelines related files
+    - :page_facing_up: *`Dockerfile`* configuration file for Docker environment CICD deployment
+    - :page_facing_up: *`demo.py`* contains pre-created and loaded dummy data for demonstration purposes
+    - :page_facing_up: *`functions.py`* contains functions for reusable logic of the main file
+    - :page_facing_up: *`main.py`* is the main project file (modified for CICD pipeline)
+    - :page_facing_up: *`requirements.txt`* Python related environment dependencies required for installation
+    - :page_facing_up: *`test_main.py`* Pytest file for main.py as a part of CICD process
 - :file_folder: *`docker`* directory contains Dockerfile
-    - :page_facing_up: *`Dockerfile`* configuration file for Docker environment deployment
+    - :page_facing_up: *`Dockerfile`* configuration file for Docker environment AWS deployment
 - :file_folder: *`python`* directory contains pure Python code:
     - :page_facing_up: *`main.py`* is the main project file
     - :page_facing_up: *`functions.py`* contains functions for reusable logic of the main file
@@ -397,15 +407,26 @@ Migrate the Python application to Apache webserver using Flask module and Docker
  - Access cloud application again in order to check workability
  - Check Auto Scaling policy
 
-## 4. License
+## 4. CI/CD Pipeline
+CICD Process Support added to this project.<br>
+Trigger: *`Push`*
+Process:
+- Step 1: Python Pure Code Checkout using Pytest:
+    - Test Condition 1: Exit flow from Main Menu (q)
+    - Test Condition 2: Invalid menu option check in Main Manu
+- Step 2: Docker Image Build (Docker Hub)
+- Step 3: Deploy Using Docker Hub Image
+
+## 5. License
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://github.com/dcoacher/it-asset-management/blob/main/LICENSE)
 
-## 5. Authors
+## 6. Authors
 This project is a result of the great collaboration of the two developers:
 - Desmond Coacher - [@dcoacher](https://github.com/dcoacher)
 - Artiom Krits - [@ArtiomKrits92](https://github.com/ArtiomKrits92)
 
-## 6. Feedback
+## 7. Feedback
 If you have any feedback, feel free to contact us via email: 
 - [Desmond Coacher](mailto:dcoacher@outlook.com)
 - [Artiom Krits](mailto:artiomkrits92@gmail.com)
+
