@@ -410,7 +410,7 @@ Migrate the Python application to Apache webserver using Flask module and Docker
 ## 4. CI/CD Pipeline
 CI/CD Process Support has been added to this project.<br>
 Trigger: *`Push`*<br><br>
-Process:
+Process Keynotes:
 - **Step 1**: Python Pure Code Checkout using Pytest:
     - **Test Condition 1**: Exit flow from Main Menu (q)
     - **Test Condition 2**: Invalid menu option check in Main Manu
@@ -429,6 +429,7 @@ This project is a result of the great collaboration of the two developers:
 If you have any feedback, feel free to contact us via email: 
 - [Desmond Coacher](mailto:dcoacher@outlook.com)
 - [Artiom Krits](mailto:artiomkrits92@gmail.com)
+
 
 
 
