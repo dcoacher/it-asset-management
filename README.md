@@ -408,14 +408,14 @@ Migrate the Python application to Apache webserver using Flask module and Docker
  - Check Auto Scaling policy
 
 ## 4. CI/CD Pipeline
-CICD Process Support added to this project.<br>
-Trigger: *`Push`*
+CI/CD Process Support has been added to this project.<br>
+Trigger: *`Push`*<br>
 Process:
-- Step 1: Python Pure Code Checkout using Pytest:
-    - Test Condition 1: Exit flow from Main Menu (q)
-    - Test Condition 2: Invalid menu option check in Main Manu
-- Step 2: Docker Image Build (Docker Hub)
-- Step 3: Deploy Using Docker Hub Image
+- **Step 1**: Python Pure Code Checkout using Pytest:
+    - **Test Condition 1**: Exit flow from Main Menu (q)
+    - **Test Condition 2**: Invalid menu option check in Main Manu
+- **Step 2**: Docker Image Build (Docker Hub)
+- **Step 3**: Deploy Using Docker Hub Image
 
 ## 5. License
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://github.com/dcoacher/it-asset-management/blob/main/LICENSE)
@@ -429,6 +429,7 @@ This project is a result of the great collaboration of the two developers:
 If you have any feedback, feel free to contact us via email: 
 - [Desmond Coacher](mailto:dcoacher@outlook.com)
 - [Artiom Krits](mailto:artiomkrits92@gmail.com)
+
 
 
 
