@@ -32,7 +32,7 @@ Make your IT Asset Management process simple and controlled. This web-based, run
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.6.1 Setting AWS Lab Credentials](#361-setting-aws-lab-credentials)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.6.2 Running Automated Deployment Script](#362-running-automated-deployment-script)<br>
     [3.7 Web Application Access and HA Testing via AWS GUI](#37-web-application-access-and-ha-testing-via-aws-gui)<br>
-4. CI/CD Pipeline(#4-ci-cd-pipeline)<br>
+4. CI/CD Pipeline(#4-cicd-pipeline)<br>
 5. [License](#5-license)<br>
 6. [Authors](#6-authors)<br>
 7. [Feedback](#7-feedback)<br>
@@ -429,4 +429,5 @@ This project is a result of the great collaboration of the two developers:
 If you have any feedback, feel free to contact us via email: 
 - [Desmond Coacher](mailto:dcoacher@outlook.com)
 - [Artiom Krits](mailto:artiomkrits92@gmail.com)
+
 
