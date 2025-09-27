@@ -95,14 +95,7 @@ jobs:
 
       - name: Docker Run
         run: |
-          docker run --rm dcoacher/it-asset-management:v1 > it-asset-management.output.txt
-          cat it-asset-management.output.txt
-
-      - name: Upload get_users.output as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: it-asset-management-output
-          path: it-asset-management.output.txt
+          docker run --rm dcoacher/it-asset-management:v1
 
 ###############################################
 # End of Step 3: Deploy Using Docker Image
